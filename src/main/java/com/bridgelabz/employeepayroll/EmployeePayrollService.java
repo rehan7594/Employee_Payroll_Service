@@ -2,7 +2,6 @@ package com.bridgelabz.employeepayroll;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class EmployeePayrollService {
 	private List<EmployeePayrollData> datas;
@@ -18,32 +17,20 @@ public class EmployeePayrollService {
 	}
 
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception  {
 
 		List<EmployeePayrollData> datas = new ArrayList<EmployeePayrollData>();
 		EmployeePayrollService service=new EmployeePayrollService(datas);
-		service.readData(new Scanner(System.in));
-		service.writeData();
-	}
 
-
-	private void writeData() {
-		System.out.println("\nWrinting Employee payroll roater to console : \n"+datas);
-	}
-
-
-	private void readData(Scanner scanner) {
-		System.out.println("Enter ID");
-		int id=scanner.nextInt();
-
-
-		System.out.println("Enter Name");
-		String name=scanner.next();
-
-		System.out.println("Enter Salary");
-		double sal=scanner.nextDouble();
-
-		this.datas.add(new EmployeePayrollData(id,sal, name));
+		FileIOUtiles utiles=new FileIOUtiles();
+		utiles.isExist("Data");
+		utiles.createFolder("Data");
+		utiles.createFile("Data/data1.txt");
+		utiles.writeTOFile("Data/data1.txt");
+		utiles.readFromFile("Data/data1.txt");
+		utiles.listOfFilesandFolder("Data");
+		utiles.delete("Data/data1.txt");
+		utiles.delete("Data");	
 	}
 }
 
@@ -60,5 +47,4 @@ class EmployeePayrollData{
 	public String toString() {
 		return "EmployeePayrollData [id=" + id + ", salary=" + salary + ", name=" + name + "]";
 	}
-
 }
